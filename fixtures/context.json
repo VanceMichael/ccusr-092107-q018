@@ -1,0 +1,10 @@
+{
+  "domain": "canal-heritage-monitoring",
+  "version": 1,
+  "facts": [
+    "运河遗产点多线长且结构材质差异明显",
+    "保护正从单点守护转向统一监测和线性联通",
+    "数字建模、导览和水上游线被用于活化利用"
+  ],
+  "sample_id": "sample-018"
+}
