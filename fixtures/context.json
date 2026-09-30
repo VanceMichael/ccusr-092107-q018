@@ -1,10 +1,306 @@
 {
   "domain": "canal-heritage-monitoring",
-  "version": 1,
+  "version": 2,
+  "sample_id": "sample-018",
   "facts": [
     "运河遗产点多线长且结构材质差异明显",
     "保护正从单点守护转向统一监测和线性联通",
-    "数字建模、导览和水上游线被用于活化利用"
+    "数字建模、导览和水上游线被用于活化利用",
+    "钞关、会馆、水工遗址与仍有人生活的古镇民居病害阈值各异，不可共用一套",
+    "单点修缮可能改变整条运河文化线路的水环境与开放安排",
+    "档案按建筑、构件、碑刻、材质、周边环境五个维度保存",
+    "监测、巡查证据、病害判断、干预方案、施工与开放条件逐版衔接",
+    "紧急加固允许先处置后补审，原状资料永远不能被覆盖",
+    "专家与预算争用、上下游影响、三维模型换版、居民隐私与游客量变化均纳入决策",
+    "公众导览引用的解释必须来自最新批准版本"
   ],
-  "sample_id": "sample-018"
+  "threshold_profiles": [
+    {
+      "profile_id": "th-chaoguan-moisture",
+      "site_type": "钞关",
+      "indicator": "木构件含水率",
+      "unit": "%",
+      "warning": 18,
+      "critical": 25
+    },
+    {
+      "profile_id": "th-huiguan-pigment",
+      "site_type": "会馆",
+      "indicator": "彩绘剥落面积比",
+      "unit": "%",
+      "warning": 5,
+      "critical": 15
+    },
+    {
+      "profile_id": "th-shuigong-crack",
+      "site_type": "水工遗址",
+      "indicator": "石体裂隙宽度",
+      "unit": "mm",
+      "warning": 2,
+      "critical": 5
+    },
+    {
+      "profile_id": "th-minju-tilt",
+      "site_type": "古镇民居",
+      "indicator": "墙体倾斜",
+      "unit": "mm/m",
+      "warning": 5,
+      "critical": 10
+    }
+  ],
+  "heritage_sites": [
+    {
+      "site_id": "site-01",
+      "name": "青柳钞关",
+      "site_type": "钞关",
+      "canal_segment": "中游段",
+      "inhabited": false,
+      "materials": ["青砖", "木梁"],
+      "archive": [
+        {
+          "dimension": "建筑",
+          "original_state": {"record_id": "arc-site01-building-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        },
+        {
+          "dimension": "构件",
+          "original_state": {"record_id": "arc-site01-component-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "碑刻",
+          "original_state": {"record_id": "arc-site01-stele-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "材质",
+          "original_state": {"record_id": "arc-site01-material-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        },
+        {
+          "dimension": "周边环境",
+          "original_state": {"record_id": "arc-site01-setting-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        }
+      ]
+    },
+    {
+      "site_id": "site-02",
+      "name": "云津会馆",
+      "site_type": "会馆",
+      "canal_segment": "中游段",
+      "inhabited": false,
+      "materials": ["青砖", "石雕", "木构架"],
+      "archive": [
+        {
+          "dimension": "建筑",
+          "original_state": {"record_id": "arc-site02-building-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "构件",
+          "original_state": {"record_id": "arc-site02-component-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "碑刻",
+          "original_state": {"record_id": "arc-site02-stele-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        },
+        {
+          "dimension": "材质",
+          "original_state": {"record_id": "arc-site02-material-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "周边环境",
+          "original_state": {"record_id": "arc-site02-setting-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        }
+      ]
+    },
+    {
+      "site_id": "site-03",
+      "name": "石梁闸遗址",
+      "site_type": "水工遗址",
+      "canal_segment": "下游段",
+      "inhabited": false,
+      "materials": ["条石", "夯土"],
+      "archive": [
+        {
+          "dimension": "建筑",
+          "original_state": {"record_id": "arc-site03-building-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "构件",
+          "original_state": {"record_id": "arc-site03-component-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "碑刻",
+          "original_state": {"record_id": "arc-site03-stele-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "材质",
+          "original_state": {"record_id": "arc-site03-material-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        },
+        {
+          "dimension": "周边环境",
+          "original_state": {"record_id": "arc-site03-setting-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        }
+      ]
+    },
+    {
+      "site_id": "site-04",
+      "name": "榆溪古镇民居",
+      "site_type": "古镇民居",
+      "canal_segment": "下游段",
+      "inhabited": true,
+      "materials": ["土坯", "木构架", "小青瓦"],
+      "archive": [
+        {
+          "dimension": "建筑",
+          "original_state": {"record_id": "arc-site04-building-v1", "version": 1, "immutable": true},
+          "latest_version": 2
+        },
+        {
+          "dimension": "构件",
+          "original_state": {"record_id": "arc-site04-component-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "碑刻",
+          "original_state": {"record_id": "arc-site04-stele-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "材质",
+          "original_state": {"record_id": "arc-site04-material-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        },
+        {
+          "dimension": "周边环境",
+          "original_state": {"record_id": "arc-site04-setting-v1", "version": 1, "immutable": true},
+          "latest_version": 1
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs-01",
+      "site_id": "site-01",
+      "profile_id": "th-chaoguan-moisture",
+      "value": 19.5,
+      "result": "预警"
+    },
+    {
+      "observation_id": "obs-02",
+      "site_id": "site-02",
+      "profile_id": "th-huiguan-pigment",
+      "value": 6.1,
+      "result": "预警"
+    },
+    {
+      "observation_id": "obs-03",
+      "site_id": "site-03",
+      "profile_id": "th-shuigong-crack",
+      "value": 2.4,
+      "result": "预警"
+    },
+    {
+      "observation_id": "obs-04",
+      "site_id": "site-04",
+      "profile_id": "th-minju-tilt",
+      "value": 3.2,
+      "result": "正常"
+    }
+  ],
+  "evidence_chains": [
+    {
+      "chain_id": "chain-site01",
+      "site_id": "site-01",
+      "stages": [
+        {"stage": "监测", "record_id": "mon-site01", "version": 2, "supersedes": "mon-site01-v1", "based_on": null},
+        {"stage": "巡查证据", "record_id": "pat-site01", "version": 1, "supersedes": null, "based_on": "mon-site01"},
+        {"stage": "病害判断", "record_id": "dia-site01", "version": 1, "supersedes": null, "based_on": "pat-site01"},
+        {"stage": "干预方案", "record_id": "pln-site01", "version": 1, "supersedes": null, "based_on": "dia-site01"},
+        {"stage": "施工与开放条件", "record_id": "exe-site01", "version": 1, "supersedes": null, "based_on": "pln-site01"}
+      ]
+    },
+    {
+      "chain_id": "chain-site04",
+      "site_id": "site-04",
+      "stages": [
+        {"stage": "监测", "record_id": "mon-site04", "version": 1, "supersedes": null, "based_on": null},
+        {"stage": "巡查证据", "record_id": "pat-site04", "version": 1, "supersedes": null, "based_on": "mon-site04"},
+        {"stage": "病害判断", "record_id": "dia-site04", "version": 1, "supersedes": null, "based_on": "pat-site04"},
+        {"stage": "干预方案", "record_id": "pln-site04", "version": 1, "supersedes": null, "based_on": "dia-site04"},
+        {"stage": "施工与开放条件", "record_id": "exe-site04", "version": 1, "supersedes": null, "based_on": "pln-site04"}
+      ]
+    }
+  ],
+  "interventions": [
+    {
+      "plan_id": "int-site04-roof",
+      "site_id": "site-04",
+      "emergency": true,
+      "executed_before_review": true,
+      "review_status": "待补审",
+      "route_impact": "局部屋面支护，不占河道，不改变线路水环境与开放安排",
+      "original_state_ref": "arc-site04-building-v1",
+      "original_state_overwritten": false
+    },
+    {
+      "plan_id": "int-site03-consolidation",
+      "site_id": "site-03",
+      "emergency": false,
+      "executed_before_review": false,
+      "review_status": "已批准",
+      "route_impact": "围堰施工期间下游段水位抬升，水上游线临时改道并调整开放时段",
+      "original_state_ref": "arc-site03-building-v1",
+      "original_state_overwritten": false
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "dec-site01-2026",
+      "site_id": "site-01",
+      "factors": {
+        "expert_contention": "结构与水文两组专家档期冲突，评审会议错峰安排",
+        "budget_contention": "与石梁闸遗址加固共用年度专项预算，按病害危急程度排序",
+        "upstream_downstream_impact": "脚手架不占河道，对上下游水环境无影响",
+        "model_version_change": "三维模型由 v3 换版至 v4，v3 存档保留可查",
+        "resident_privacy": "无居民住户，不涉及隐私",
+        "visitor_volume_change": "施工期预计日均游客量下降约两成"
+      }
+    },
+    {
+      "decision_id": "dec-site04-2026",
+      "site_id": "site-04",
+      "factors": {
+        "expert_contention": "民居修缮专家与钞关项目争用，优先保障紧急加固",
+        "budget_contention": "户主自筹与省级补助并行，预算缺口列入下年度",
+        "upstream_downstream_impact": "不改变河道，对上下游无影响",
+        "model_version_change": "维持 v2 模型，仅补拍屋面影像",
+        "resident_privacy": "民居仍有人生活，监测设备避开卧室与院落私密区域，影像脱敏后归档",
+        "visitor_volume_change": "古镇游客量季节性上升，开放时间与居民作息错开"
+      }
+    }
+  ],
+  "interpretations": [
+    {"interpretation_id": "exp-site01", "site_id": "site-01", "version": 1, "status": "已废止"},
+    {"interpretation_id": "exp-site01", "site_id": "site-01", "version": 2, "status": "已废止"},
+    {"interpretation_id": "exp-site01", "site_id": "site-01", "version": 3, "status": "已批准"},
+    {"interpretation_id": "exp-site04", "site_id": "site-04", "version": 1, "status": "已批准"},
+    {"interpretation_id": "exp-site04", "site_id": "site-04", "version": 2, "status": "草案"}
+  ],
+  "guide_citations": [
+    {"citation_id": "cite-01", "interpretation_id": "exp-site01", "version": 3},
+    {"citation_id": "cite-02", "interpretation_id": "exp-site04", "version": 1}
+  ]
 }

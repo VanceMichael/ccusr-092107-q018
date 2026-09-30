@@ -6,7 +6,15 @@
     "domain",
     "version",
     "facts",
-    "sample_id"
+    "sample_id",
+    "threshold_profiles",
+    "heritage_sites",
+    "observations",
+    "evidence_chains",
+    "interventions",
+    "decisions",
+    "interpretations",
+    "guide_citations"
   ],
   "properties": {
     "domain": {
@@ -27,6 +35,424 @@
     "sample_id": {
       "type": "string",
       "minLength": 1
+    },
+    "threshold_profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "profile_id",
+          "site_type",
+          "indicator",
+          "unit",
+          "warning",
+          "critical"
+        ],
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_type": {
+            "enum": [
+              "钞关",
+              "会馆",
+              "水工遗址",
+              "古镇民居"
+            ]
+          },
+          "indicator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "warning": {
+            "type": "number"
+          },
+          "critical": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "heritage_sites": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "site_id",
+          "name",
+          "site_type",
+          "canal_segment",
+          "inhabited",
+          "materials",
+          "archive"
+        ],
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_type": {
+            "enum": [
+              "钞关",
+              "会馆",
+              "水工遗址",
+              "古镇民居"
+            ]
+          },
+          "canal_segment": {
+            "type": "string",
+            "minLength": 1
+          },
+          "inhabited": {
+            "type": "boolean"
+          },
+          "materials": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "archive": {
+            "type": "array",
+            "minItems": 5,
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": [
+                "dimension",
+                "original_state",
+                "latest_version"
+              ],
+              "properties": {
+                "dimension": {
+                  "enum": [
+                    "建筑",
+                    "构件",
+                    "碑刻",
+                    "材质",
+                    "周边环境"
+                  ]
+                },
+                "original_state": {
+                  "type": "object",
+                  "required": [
+                    "record_id",
+                    "version",
+                    "immutable"
+                  ],
+                  "properties": {
+                    "record_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "version": {
+                      "const": 1
+                    },
+                    "immutable": {
+                      "const": true
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "latest_version": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "observation_id",
+          "site_id",
+          "profile_id",
+          "value",
+          "result"
+        ],
+        "properties": {
+          "observation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "profile_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "number"
+          },
+          "result": {
+            "enum": [
+              "正常",
+              "预警",
+              "危急"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_chains": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "chain_id",
+          "site_id",
+          "stages"
+        ],
+        "properties": {
+          "chain_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stages": {
+            "type": "array",
+            "minItems": 5,
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": [
+                "stage",
+                "record_id",
+                "version",
+                "supersedes",
+                "based_on"
+              ],
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "监测",
+                    "巡查证据",
+                    "病害判断",
+                    "干预方案",
+                    "施工与开放条件"
+                  ]
+                },
+                "record_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "supersedes": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "based_on": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "plan_id",
+          "site_id",
+          "emergency",
+          "executed_before_review",
+          "review_status",
+          "route_impact",
+          "original_state_ref",
+          "original_state_overwritten"
+        ],
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "emergency": {
+            "type": "boolean"
+          },
+          "executed_before_review": {
+            "type": "boolean"
+          },
+          "review_status": {
+            "enum": [
+              "待审",
+              "已批准",
+              "待补审",
+              "已补审"
+            ]
+          },
+          "route_impact": {
+            "type": "string",
+            "minLength": 1
+          },
+          "original_state_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "original_state_overwritten": {
+            "const": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "decision_id",
+          "site_id",
+          "factors"
+        ],
+        "properties": {
+          "decision_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "factors": {
+            "type": "object",
+            "required": [
+              "expert_contention",
+              "budget_contention",
+              "upstream_downstream_impact",
+              "model_version_change",
+              "resident_privacy",
+              "visitor_volume_change"
+            ],
+            "properties": {
+              "expert_contention": {
+                "type": "string"
+              },
+              "budget_contention": {
+                "type": "string"
+              },
+              "upstream_downstream_impact": {
+                "type": "string"
+              },
+              "model_version_change": {
+                "type": "string"
+              },
+              "resident_privacy": {
+                "type": "string"
+              },
+              "visitor_volume_change": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "interpretation_id",
+          "site_id",
+          "version",
+          "status"
+        ],
+        "properties": {
+          "interpretation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "enum": [
+              "草案",
+              "已批准",
+              "已废止"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "guide_citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "citation_id",
+          "interpretation_id",
+          "version"
+        ],
+        "properties": {
+          "citation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "interpretation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false
