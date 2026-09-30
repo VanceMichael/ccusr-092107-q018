@@ -1,12 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "领域资料",
+  "title": "运河古建联防监测领域资料",
   "type": "object",
   "required": [
     "domain",
     "version",
     "facts",
-    "sample_id"
+    "sample_id",
+    "heritage_points",
+    "threshold_profiles",
+    "observation_samples",
+    "archives",
+    "interventions",
+    "models_3d",
+    "public_guides"
   ],
   "properties": {
     "domain": {
@@ -27,7 +34,592 @@
     "sample_id": {
       "type": "string",
       "minLength": 1
+    },
+    "heritage_points": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/heritage_point"
+      }
+    },
+    "threshold_profiles": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/threshold_profile"
+      }
+    },
+    "observation_samples": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation_sample"
+      }
+    },
+    "archives": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/archive"
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/intervention"
+      }
+    },
+    "models_3d": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/model_3d"
+      }
+    },
+    "public_guides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/public_guide"
+      }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "heritage_point": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "point_type",
+        "chain_position_km",
+        "threshold_profile_id",
+        "inhabited"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^hp-[a-z]+-\\d+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "point_type": {
+          "type": "string",
+          "enum": [
+            "钞关",
+            "会馆",
+            "水工遗址",
+            "古镇民居"
+          ]
+        },
+        "chain_position_km": {
+          "type": "number",
+          "minimum": 0,
+          "description": "沿运河文化线路的桩号公里数，用于判断上下游关系"
+        },
+        "threshold_profile_id": {
+          "type": "string",
+          "pattern": "^tp-[a-z]+$"
+        },
+        "inhabited": {
+          "type": "boolean",
+          "description": "是否仍有居民生活，仅古镇民居可为 true"
+        }
+      },
+      "additionalProperties": false
+    },
+    "threshold_profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "applies_to_type",
+        "disease_thresholds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^tp-[a-z]+$"
+        },
+        "applies_to_type": {
+          "type": "string",
+          "enum": [
+            "钞关",
+            "会馆",
+            "水工遗址",
+            "古镇民居"
+          ]
+        },
+        "disease_thresholds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/disease_threshold"
+          }
+        },
+        "rationale": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "disease_threshold": {
+      "type": "object",
+      "required": [
+        "indicator",
+        "unit",
+        "normal_max",
+        "warning_max",
+        "action_max"
+      ],
+      "properties": {
+        "indicator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normal_max": {
+          "type": "number"
+        },
+        "warning_max": {
+          "type": "number"
+        },
+        "action_max": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "observation_sample": {
+      "type": "object",
+      "required": [
+        "id",
+        "heritage_point_id",
+        "recorded_date",
+        "readings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^os-\\d+$"
+        },
+        "heritage_point_id": {
+          "type": "string"
+        },
+        "recorded_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "readings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/reading"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reading": {
+      "type": "object",
+      "required": [
+        "indicator",
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "indicator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "archive": {
+      "type": "object",
+      "required": [
+        "id",
+        "heritage_point_id",
+        "category",
+        "subject",
+        "versions"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ar-[a-z0-9-]+$"
+        },
+        "heritage_point_id": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "建筑",
+            "构件",
+            "碑刻",
+            "材质",
+            "周边环境"
+          ]
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "versions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/archive_version"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "archive_version": {
+      "type": "object",
+      "required": [
+        "version",
+        "stage",
+        "status",
+        "created_date",
+        "is_original_state_record",
+        "supersedes_version",
+        "evidence_refs"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "监测",
+            "巡查证据",
+            "病害判断",
+            "干预方案",
+            "施工",
+            "开放条件"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "草稿",
+            "已批准",
+            "先处置待补审",
+            "作废"
+          ]
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "is_original_state_record": {
+          "type": "boolean",
+          "description": "原状资料标记，一旦形成只允许追加、永不覆盖或作废"
+        },
+        "supersedes_version": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "引用依据：档案版本 ar-x#2 或观察样例 os-001"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "record_privacy": {
+          "type": "string",
+          "description": "涉及居民生活的影像、入户信息等的脱敏与访问限制说明"
+        },
+        "emergency": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "action_first",
+            "ratified_by_version"
+          ],
+          "properties": {
+            "action_first": {
+              "type": "boolean",
+              "description": "紧急加固是否先处置后补审"
+            },
+            "ratified_by_version": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "补审追认所在的后续版本号；null 表示补审尚在办理"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ratifies_version": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "本版本为对某紧急处置版本的补审追认"
+        }
+      },
+      "additionalProperties": false
+    },
+    "intervention": {
+      "type": "object",
+      "required": [
+        "id",
+        "heritage_point_id",
+        "title",
+        "based_on_refs",
+        "model_id",
+        "water_environment",
+        "opening_arrangement",
+        "decision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^iv-[a-z0-9-]+$"
+        },
+        "heritage_point_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "based_on_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "必须引用已批准的病害判断版本"
+        },
+        "model_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "决策采用的三维模型，须为该遗产点现行版本"
+        },
+        "water_environment": {
+          "$ref": "#/$defs/water_effect"
+        },
+        "opening_arrangement": {
+          "$ref": "#/$defs/opening_effect"
+        },
+        "decision": {
+          "$ref": "#/$defs/decision"
+        }
+      },
+      "additionalProperties": false
+    },
+    "water_effect": {
+      "type": "object",
+      "required": [
+        "upstream_point_ids",
+        "downstream_point_ids",
+        "assessment"
+      ],
+      "properties": {
+        "upstream_point_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "downstream_point_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessment": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "opening_effect": {
+      "type": "object",
+      "required": [
+        "affected_point_ids",
+        "arrangement"
+      ],
+      "properties": {
+        "affected_point_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "arrangement": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "factors",
+        "outcome",
+        "decided_date",
+        "decided_by"
+      ],
+      "properties": {
+        "factors": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/decision_factor"
+          },
+          "description": "专家争用、预算争用、上下游影响、三维模型换版、居民隐私、游客量变化六项必须逐项进入决策"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "批准",
+            "暂缓",
+            "驳回"
+          ]
+        },
+        "decided_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "decided_by": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision_factor": {
+      "type": "object",
+      "required": [
+        "factor",
+        "detail"
+      ],
+      "properties": {
+        "factor": {
+          "type": "string",
+          "enum": [
+            "专家争用",
+            "预算争用",
+            "上下游影响",
+            "三维模型换版",
+            "居民隐私",
+            "游客量变化"
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "model_3d": {
+      "type": "object",
+      "required": [
+        "id",
+        "heritage_point_id",
+        "model_version",
+        "status",
+        "supersedes_id",
+        "created_date"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^m3d-[a-z0-9-]+$"
+        },
+        "heritage_point_id": {
+          "type": "string"
+        },
+        "model_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "现行",
+            "历史"
+          ]
+        },
+        "supersedes_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    },
+    "public_guide": {
+      "type": "object",
+      "required": [
+        "id",
+        "heritage_point_id",
+        "status",
+        "interpretation_ref",
+        "title",
+        "published_date"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^gd-\\d+$"
+        },
+        "heritage_point_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "已发布",
+            "草稿"
+          ]
+        },
+        "interpretation_ref": {
+          "type": "string",
+          "description": "解释来源，格式 ar-x#版本号；已发布导览必须指向该档案最新有效批准版本"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }

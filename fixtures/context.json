@@ -1,10 +1,383 @@
 {
   "domain": "canal-heritage-monitoring",
-  "version": 1,
+  "version": 2,
   "facts": [
     "运河遗产点多线长且结构材质差异明显",
+    "钞关、会馆、水工遗址、古镇民居执行差异化病害阈值，不共用一套标准",
     "保护正从单点守护转向统一监测和线性联通",
+    "档案按建筑、构件、碑刻、材质、周边环境分类，监测、巡查证据、病害判断、干预方案、施工与开放条件六阶段逐版衔接",
+    "紧急加固允许先处置后补审，原状资料只允许追加、永不被覆盖或作废",
+    "单点修缮必须评估对整条运河文化线路水环境与开放安排的上下游影响",
+    "专家争用、预算争用、上下游影响、三维模型换版、居民隐私、游客量变化六项必须逐项进入干预决策",
+    "公众导览引用的解释只能来自档案的最新批准版本",
     "数字建模、导览和水上游线被用于活化利用"
   ],
-  "sample_id": "sample-018"
+  "sample_id": "sample-018",
+  "heritage_points": [
+    {
+      "id": "hp-customs-01",
+      "name": "临清钞关遗址（虚构名）",
+      "point_type": "钞关",
+      "chain_position_km": 120.0,
+      "threshold_profile_id": "tp-customs",
+      "inhabited": false
+    },
+    {
+      "id": "hp-guild-01",
+      "name": "聊城山陕会馆（虚构名）",
+      "point_type": "会馆",
+      "chain_position_km": 180.5,
+      "threshold_profile_id": "tp-guild",
+      "inhabited": false
+    },
+    {
+      "id": "hp-sluice-01",
+      "name": "荆门闸水工遗址（虚构名）",
+      "point_type": "水工遗址",
+      "chain_position_km": 240.0,
+      "threshold_profile_id": "tp-hydraulic",
+      "inhabited": false
+    },
+    {
+      "id": "hp-town-01",
+      "name": "南阳古镇沿河民居群（虚构名）",
+      "point_type": "古镇民居",
+      "chain_position_km": 300.0,
+      "threshold_profile_id": "tp-town",
+      "inhabited": true
+    }
+  ],
+  "threshold_profiles": [
+    {
+      "id": "tp-customs",
+      "applies_to_type": "钞关",
+      "rationale": "砖构关楼，以墙体裂缝与整体倾斜控制为主",
+      "disease_thresholds": [
+        {"indicator": "裂缝宽度", "unit": "mm", "normal_max": 1.0, "warning_max": 3.0, "action_max": 5.0},
+        {"indicator": "倾斜率", "unit": "‰", "normal_max": 2.0, "warning_max": 4.0, "action_max": 7.0},
+        {"indicator": "含水率", "unit": "%", "normal_max": 12.0, "warning_max": 16.0, "action_max": 20.0}
+      ]
+    },
+    {
+      "id": "tp-guild",
+      "applies_to_type": "会馆",
+      "rationale": "砖木混合且多雕刻彩绘，裂缝与含水率控制最严",
+      "disease_thresholds": [
+        {"indicator": "裂缝宽度", "unit": "mm", "normal_max": 0.3, "warning_max": 1.0, "action_max": 2.0},
+        {"indicator": "倾斜率", "unit": "‰", "normal_max": 1.5, "warning_max": 3.0, "action_max": 6.0},
+        {"indicator": "含水率", "unit": "%", "normal_max": 11.0, "warning_max": 14.0, "action_max": 17.0}
+      ]
+    },
+    {
+      "id": "tp-hydraulic",
+      "applies_to_type": "水工遗址",
+      "rationale": "浆砌石闸坝长期临水，允许变形较大，重点控制水位变幅与构件位移",
+      "disease_thresholds": [
+        {"indicator": "裂缝宽度", "unit": "mm", "normal_max": 3.0, "warning_max": 6.0, "action_max": 10.0},
+        {"indicator": "倾斜率", "unit": "‰", "normal_max": 3.0, "warning_max": 6.0, "action_max": 10.0},
+        {"indicator": "水位变幅", "unit": "m", "normal_max": 1.0, "warning_max": 2.0, "action_max": 3.0},
+        {"indicator": "石板位移", "unit": "mm", "normal_max": 10.0, "warning_max": 20.0, "action_max": 40.0}
+      ]
+    },
+    {
+      "id": "tp-town",
+      "applies_to_type": "古镇民居",
+      "rationale": "民居仍在使用，取中等阈值并兼顾居住安全与扰动最小",
+      "disease_thresholds": [
+        {"indicator": "裂缝宽度", "unit": "mm", "normal_max": 1.0, "warning_max": 2.5, "action_max": 4.0},
+        {"indicator": "倾斜率", "unit": "‰", "normal_max": 2.0, "warning_max": 4.0, "action_max": 8.0},
+        {"indicator": "含水率", "unit": "%", "normal_max": 14.0, "warning_max": 18.0, "action_max": 22.0}
+      ]
+    }
+  ],
+  "observation_samples": [
+    {
+      "id": "os-001",
+      "heritage_point_id": "hp-customs-01",
+      "recorded_date": "2026-03-02",
+      "readings": [
+        {"indicator": "裂缝宽度", "value": 2.1, "unit": "mm"}
+      ]
+    },
+    {
+      "id": "os-002",
+      "heritage_point_id": "hp-guild-01",
+      "recorded_date": "2026-03-04",
+      "readings": [
+        {"indicator": "含水率", "value": 15.4, "unit": "%"},
+        {"indicator": "倾斜率", "value": 1.8, "unit": "‰"}
+      ]
+    },
+    {
+      "id": "os-003",
+      "heritage_point_id": "hp-sluice-01",
+      "recorded_date": "2026-02-09",
+      "readings": [
+        {"indicator": "石板位移", "value": 24.0, "unit": "mm"},
+        {"indicator": "水位变幅", "value": 1.6, "unit": "m"}
+      ]
+    },
+    {
+      "id": "os-004",
+      "heritage_point_id": "hp-town-01",
+      "recorded_date": "2026-02-28",
+      "readings": [
+        {"indicator": "倾斜率", "value": 5.1, "unit": "‰"},
+        {"indicator": "裂缝宽度", "value": 1.4, "unit": "mm"}
+      ]
+    }
+  ],
+  "archives": [
+    {
+      "id": "ar-customs-northwall",
+      "heritage_point_id": "hp-customs-01",
+      "category": "建筑",
+      "subject": "钞关征税大厅北墙",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-03-05",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": ["os-001"], "purpose": "北墙裂缝首次定点监测与原状留痕"
+        },
+        {
+          "version": 2, "stage": "巡查证据", "status": "已批准", "created_date": "2026-03-12",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-customs-northwall#1"], "purpose": "雨后裂缝复测影像与台账"
+        },
+        {
+          "version": 3, "stage": "病害判断", "status": "已批准", "created_date": "2026-03-20",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-customs-northwall#2"], "purpose": "判定为地基不均匀沉降引发的结构性裂缝"
+        },
+        {
+          "version": 4, "stage": "干预方案", "status": "已批准", "created_date": "2026-04-01",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-customs-northwall#3"], "purpose": "裂缝注浆加钢制拉杆，最小干预"
+        },
+        {
+          "version": 5, "stage": "施工", "status": "已批准", "created_date": "2026-05-10",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-customs-northwall#4"], "purpose": "施工记录与隐蔽工程验收"
+        },
+        {
+          "version": 6, "stage": "开放条件", "status": "已批准", "created_date": "2026-06-01",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-customs-northwall#5"], "purpose": "确认北墙区域满足分时开放条件"
+        }
+      ]
+    },
+    {
+      "id": "ar-sluice-pier",
+      "heritage_point_id": "hp-sluice-01",
+      "category": "构件",
+      "subject": "北岸闸墩",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-02-10",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": ["os-003"], "purpose": "闸墩位移与临水缝原状监测"
+        },
+        {
+          "version": 2, "stage": "巡查证据", "status": "已批准", "created_date": "2026-02-15",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-sluice-pier#1"], "purpose": "春巡发现闸墩外倾加速"
+        },
+        {
+          "version": 3, "stage": "病害判断", "status": "已批准", "created_date": "2026-02-20",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-sluice-pier#2"], "purpose": "判定闸墩存在失稳风险，需立即支顶"
+        },
+        {
+          "version": 4, "stage": "施工", "status": "先处置待补审", "created_date": "2026-02-22",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-sluice-pier#3"], "purpose": "汛前紧急钢支撑加固，先处置后补审",
+          "emergency": {"action_first": true, "ratified_by_version": 5}
+        },
+        {
+          "version": 5, "stage": "施工", "status": "已批准", "created_date": "2026-03-02",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-sluice-pier#4"], "purpose": "补审追认紧急钢支撑方案并归档",
+          "ratifies_version": 4
+        }
+      ]
+    },
+    {
+      "id": "ar-town-dwelling",
+      "heritage_point_id": "hp-town-01",
+      "category": "建筑",
+      "subject": "沿河民居12号院（虚构门牌）",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-03-01",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": ["os-004"], "purpose": "住户墙体倾斜原状点云",
+          "record_privacy": "入户点云与影像脱敏处理，仅限保护审查人员访问，不进入公众导览"
+        },
+        {
+          "version": 2, "stage": "巡查证据", "status": "已批准", "created_date": "2026-03-08",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-town-dwelling#1"], "purpose": "院落倾斜巡查记录，隐去住户信息",
+          "record_privacy": "同v1脱敏要求"
+        },
+        {
+          "version": 3, "stage": "施工", "status": "先处置待补审", "created_date": "2026-03-09",
+          "is_original_state_record": false, "supersedes_version": null,
+          "evidence_refs": ["ar-town-dwelling#2"], "purpose": "院内紧急木支顶保护住户安全，补审在办",
+          "record_privacy": "施工照片中居民面部与门牌模糊处理",
+          "emergency": {"action_first": true, "ratified_by_version": null}
+        }
+      ]
+    },
+    {
+      "id": "ar-guild-wood",
+      "heritage_point_id": "hp-guild-01",
+      "category": "材质",
+      "subject": "拜殿木雕饰件含水率",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-03-05",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": ["os-002"], "purpose": "木构件含水率季度监测基线"
+        }
+      ]
+    },
+    {
+      "id": "ar-guild-stele",
+      "heritage_point_id": "hp-guild-01",
+      "category": "碑刻",
+      "subject": "会馆重修集资碑",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-01-20",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": [], "purpose": "碑面题刻录文与风化现状留档"
+        }
+      ]
+    },
+    {
+      "id": "ar-town-env",
+      "heritage_point_id": "hp-town-01",
+      "category": "周边环境",
+      "subject": "民居群外围水巷与游客流线",
+      "versions": [
+        {
+          "version": 1, "stage": "监测", "status": "已批准", "created_date": "2026-01-25",
+          "is_original_state_record": true, "supersedes_version": null,
+          "evidence_refs": [], "purpose": "水巷水位、码头与客流基线调查"
+        }
+      ]
+    }
+  ],
+  "interventions": [
+    {
+      "id": "iv-customs-tie",
+      "heritage_point_id": "hp-customs-01",
+      "title": "北墙裂缝注浆与拉杆加固",
+      "based_on_refs": ["ar-customs-northwall#3"],
+      "model_id": "m3d-customs-02",
+      "water_environment": {
+        "upstream_point_ids": [],
+        "downstream_point_ids": ["hp-guild-01", "hp-sluice-01"],
+        "assessment": "注浆与拉杆作业在岸上关楼内完成，不改变河道过水断面，下游闸、馆水位无叠加影响，仍同步观测一个汛期"
+      },
+      "opening_arrangement": {
+        "affected_point_ids": ["hp-customs-01"],
+        "arrangement": "施工期北墙展区封闭、其余院落分时开放，完工后按开放条件版本恢复"
+      },
+      "decision": {
+        "factors": [
+          {"factor": "专家争用", "detail": "结构专家主张注浆，砖作专家担心浆液改变原砖含水率，经会商采用低收缩匹配砂浆"},
+          {"factor": "预算争用", "detail": "与水工遗址汛前支顶同批申报，本项非紧急，排期让位于先处置项目，分两期拨付"},
+          {"factor": "上下游影响", "detail": "不进入河道，对下游会馆、闸址水位与流态无影响，仅做汛期同步观测"},
+          {"factor": "三维模型换版", "detail": "审查采用现行m3d-customs-02（v2），旧v1模型留存但禁止作为决策依据"},
+          {"factor": "居民隐私", "detail": "施工区无住户，不涉及居民信息采集"},
+          {"factor": "游客量变化", "detail": "分时开放预计旺季客流下降约一成，以线上导览补偿"}
+        ],
+        "outcome": "批准",
+        "decided_date": "2026-04-02",
+        "decided_by": "省文物保护审查组（虚构机构）"
+      }
+    },
+    {
+      "id": "iv-sluice-brace",
+      "heritage_point_id": "hp-sluice-01",
+      "title": "北岸闸墩汛前紧急钢支撑",
+      "based_on_refs": ["ar-sluice-pier#3"],
+      "model_id": null,
+      "water_environment": {
+        "upstream_point_ids": ["hp-customs-01", "hp-guild-01"],
+        "downstream_point_ids": ["hp-town-01"],
+        "assessment": "临时支墩占用水侧约1.2米，要求汛后拆除；已通知上游两点关注壅水、下游古镇关注水巷流速变化"
+      },
+      "opening_arrangement": {
+        "affected_point_ids": ["hp-sluice-01", "hp-town-01"],
+        "arrangement": "遗址观水平台临时封闭；下游古镇水上游线改道，码头分流"
+      },
+      "decision": {
+        "factors": [
+          {"factor": "专家争用", "detail": "抢险组一致同意钢支撑，对是否同时封底有分歧，按最小扰动先只支顶"},
+          {"factor": "预算争用", "detail": "动用年度应急储备金，先于钞关常规修缮列支，事后补审决算"},
+          {"factor": "上下游影响", "detail": "占用水侧断面影响过流，上游壅水、下游水巷流速变化均纳入监测通报"},
+          {"factor": "三维模型换版", "detail": "险情紧急来不及建模，决策不引用三维模型，汛后补测并出模型再核销"},
+          {"factor": "居民隐私", "detail": "作业区与水巷改道公告不出现住户门牌，拍摄视角避开民居院内"},
+          {"factor": "游客量变化", "detail": "平台封闭使该点到访量短期下降，改道使古镇码头客流短时上升，需限流"}
+        ],
+        "outcome": "批准",
+        "decided_date": "2026-02-22",
+        "decided_by": "省文物保护审查组（虚构机构）"
+      }
+    }
+  ],
+  "models_3d": [
+    {
+      "id": "m3d-customs-01",
+      "heritage_point_id": "hp-customs-01",
+      "model_version": 1,
+      "status": "历史",
+      "supersedes_id": null,
+      "created_date": "2025-11-01"
+    },
+    {
+      "id": "m3d-customs-02",
+      "heritage_point_id": "hp-customs-01",
+      "model_version": 2,
+      "status": "现行",
+      "supersedes_id": "m3d-customs-01",
+      "created_date": "2026-03-25"
+    },
+    {
+      "id": "m3d-sluice-01",
+      "heritage_point_id": "hp-sluice-01",
+      "model_version": 1,
+      "status": "现行",
+      "supersedes_id": null,
+      "created_date": "2026-01-15"
+    }
+  ],
+  "public_guides": [
+    {
+      "id": "gd-001",
+      "heritage_point_id": "hp-customs-01",
+      "status": "已发布",
+      "interpretation_ref": "ar-customs-northwall#6",
+      "title": "钞关北墙是怎样加固并重新开放的",
+      "published_date": "2026-06-05"
+    },
+    {
+      "id": "gd-002",
+      "heritage_point_id": "hp-sluice-01",
+      "status": "草稿",
+      "interpretation_ref": "ar-sluice-pier#3",
+      "title": "闸墩为什么穿上了‘钢架护腰’（在编，待开放条件版本批准后更新）",
+      "published_date": "2026-03-10"
+    },
+    {
+      "id": "gd-003",
+      "heritage_point_id": "hp-guild-01",
+      "status": "已发布",
+      "interpretation_ref": "ar-guild-stele#1",
+      "title": "会馆集资碑上的运河商人",
+      "published_date": "2026-02-01"
+    }
+  ]
 }
